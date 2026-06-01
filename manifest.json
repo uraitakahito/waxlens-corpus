@@ -1,0 +1,405 @@
+{
+  "generatedBy": "waxlens / build-corpus",
+  "defaultProfile": "spec",
+  "fixtures": [
+    {
+      "file": "fixtures/good.wacz",
+      "description": "全 rule を pass する黄金 WACZ (browserhive producer)",
+      "expect": {
+        "valid": true,
+        "issues": []
+      }
+    },
+    {
+      "file": "fixtures/good-webrecorder.wacz",
+      "description": "webrecorder producer の黄金。spec/lenient では valid、browserhive では cdxj/index-not-gzipped が error (byProfile になる)",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/datapackage-no-profile.wacz",
+      "description": "datapackage.json の profile field を省略",
+      "expect": {
+        "valid": false,
+        "issues": [
+          {
+            "rule": "datapackage/profile-required",
+            "severity": "error"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/datapackage-wrong-profile.wacz",
+      "description": "datapackage.json の profile が不正な値",
+      "expect": {
+        "valid": false,
+        "issues": [
+          {
+            "rule": "datapackage/profile-required",
+            "severity": "error"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/datapackage-unknown-version.wacz",
+      "description": "wacz_version が未知の値 (9.9.9) — warning",
+      "expect": {
+        "valid": true,
+        "issues": [
+          {
+            "rule": "datapackage/wacz-version-required",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/datapackage-bad-hash.wacz",
+      "description": "datapackage.json の resource hash が実体と不一致",
+      "expect": {
+        "valid": false,
+        "issues": [
+          {
+            "rule": "datapackage/resource-hashes",
+            "severity": "error"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/datapackage-absent.wacz",
+      "description": "datapackage.json を丸ごと欠落 (複数 datapackage rule に波及)",
+      "expect": {
+        "valid": false,
+        "issues": [
+          {
+            "rule": "datapackage/profile-required",
+            "severity": "error"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/cdxj-filename-absolute.wacz",
+      "description": "CDXJ の filename が archive-relative でない",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/filename-archive-relative",
+              "severity": "error"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/filename-archive-relative",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/filename-archive-relative",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/cdxj-index-gzipped.wacz",
+      "description": "index を gzip 化 (browserhive layout)。index-not-gzipped と index-recognised-by-wabac が発火",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-recognised-by-wabac",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-recognised-by-wabac",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-recognised-by-wabac",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/cdxj-offset-wrong.wacz",
+      "description": "CDXJ の offset が WARC 実体とずれている",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "error"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/cdxj-length-mismatch.wacz",
+      "description": "CDXJ の length が WARC member 長と不一致 (length 分岐)",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "error"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/cdxj-mainpage-orphan.wacz",
+      "description": "mainPageURL が CDXJ/pages に存在しない URL — warning",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "warning"
+            },
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "warning"
+            },
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "info"
+            },
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/warc-deflate.wacz",
+      "description": "WARC を DEFLATE 格納 (STORE であるべき) — warning",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "warc/storage-store",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "warc/storage-store",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "warc/storage-store",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/warc-corrupt-member.wacz",
+      "description": "WARC.gz の deflate stream を 1 byte 破壊 (decode 不能)",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "warc/members-independent",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "error"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "warc/members-independent",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "warc/members-independent",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/warc-offsets",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/warc-payload-digest-bad.wacz",
+      "description": "WARC-Payload-Digest header が実体と不一致 — warning",
+      "expect": {
+        "valid": true,
+        "issues": [
+          {
+            "rule": "warc/payload-digest",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/fuzzy-not-json.wacz",
+      "description": "fuzzy.json が JSON でない — info",
+      "expect": {
+        "valid": true,
+        "issues": [
+          {
+            "rule": "fuzzy/valid-json",
+            "severity": "info"
+          }
+        ]
+      }
+    }
+  ]
+}
