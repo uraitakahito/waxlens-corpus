@@ -109,6 +109,34 @@
       }
     },
     {
+      "file": "fixtures/datapackage-frictionless-bad-name.wacz",
+      "description": "resource.name が Frictionless の許容パターン外 (大文字)。WACZ 固有 rule は通り、frictionless-schema だけが warning (lenient では除外)",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/frictionless-schema",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/frictionless-schema",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": []
+        }
+      }
+    },
+    {
       "file": "fixtures/cdxj-filename-absolute.wacz",
       "description": "CDXJ の filename が archive-relative でない",
       "byProfile": {
