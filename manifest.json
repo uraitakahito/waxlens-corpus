@@ -471,6 +471,220 @@
           }
         ]
       }
+    },
+    {
+      "file": "fixtures/warc-extension-mismatch.wacz",
+      "description": "gzip 済み WARC を .warc.gz でなく archive/data.warc 名で格納(§5.2.1 拡張子)",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "datapackage/resource-hashes",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "warc/extension-gzip-match",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "datapackage/resource-hashes",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "warc/extension-gzip-match",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "datapackage/resource-hashes",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            },
+            {
+              "rule": "warc/extension-gzip-match",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/pages-bad-line.wacz",
+      "description": "pages.jsonl の page 行が url/ts を欠く(§5.2.3)",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "pages/page-schema",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "pages/page-schema",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "pages/page-schema",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/datapackage-digest-absent.wacz",
+      "description": "datapackage-digest.json が無い(§5.2.5 SHOULD)— warning",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/digest",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/digest",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/digest",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/datapackage-digest-bad-hash.wacz",
+      "description": "datapackage-digest.json の hash が datapackage.json と不一致 — error",
+      "expect": {
+        "valid": false,
+        "issues": [
+          {
+            "rule": "datapackage/digest",
+            "severity": "error"
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixtures/reserved-dir-extra-file.wacz",
+      "description": "予約ディレクトリ archive/ に異物ファイル(archive/notes.txt)— MUST NOT",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "wacz/reserved-dirs-clean",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "wacz/reserved-dirs-clean",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "wacz/reserved-dirs-clean",
+              "severity": "info"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/datapackage-orphan-file.wacz",
+      "description": "resources に未宣言の孤児ファイル(extra.bin)— MUST",
+      "byProfile": {
+        "spec": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": true,
+          "issues": [
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            }
+          ]
+        }
+      }
     }
   ]
 }
