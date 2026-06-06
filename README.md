@@ -2,7 +2,7 @@
 
 [waxlens](https://github.com/uraitakahito/waxlens) の validation rule を検証する
 ための WACZ 標本集。 各 rule を **違反させる WACZ** と、 全 rule を **pass する
-黄金 WACZ** を収め、 期待結果を単一の `manifest.json` に集約する
+正常系 WACZ** を収め、 期待結果を単一の `manifest.json` に集約する
 (flat fixtures + 中央 manifest)。
 
 WACZ は Git LFS で格納する（`.gitattributes` 参照）。
@@ -11,8 +11,8 @@ WACZ は Git LFS で格納する（`.gitattributes` 参照）。
 
 ```
 fixtures/            全 WACZ 標本 (Git LFS)
-  good.wacz                  全 rule pass の黄金 (browserhive producer)
-  good-webrecorder.wacz      webrecorder producer の黄金
+  good.wacz                  全 rule pass の正常系 (browserhive producer)
+  good-webrecorder.wacz      webrecorder producer の正常系
   warc-deflate.wacz          各 rule を 1 つ違反させた標本 …
   …
 manifest.json        各 fixture の期待 validation 結果 (単一の真実源)
