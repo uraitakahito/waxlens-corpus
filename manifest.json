@@ -4,7 +4,7 @@
   "fixtures": [
     {
       "file": "fixtures/good.wacz",
-      "description": "全 rule を pass する黄金 WACZ (browserhive producer)",
+      "description": "全 rule を pass する正常系 WACZ (browserhive producer)",
       "expect": {
         "valid": true,
         "issues": []
@@ -12,7 +12,7 @@
     },
     {
       "file": "fixtures/good-webrecorder.wacz",
-      "description": "webrecorder producer の黄金。spec/lenient では valid、browserhive では cdxj/index-not-gzipped が error (byProfile になる)",
+      "description": "webrecorder producer の正常系。spec/lenient では valid、browserhive では cdxj/index-not-gzipped が error (byProfile になる)",
       "byProfile": {
         "spec": {
           "valid": true,
