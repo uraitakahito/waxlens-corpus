@@ -137,6 +137,103 @@
       }
     },
     {
+      "file": "fixtures/datapackage-empty-resources.wacz",
+      "description": "resources を空配列に。frictionless-structure が構造 MUST 違反を error 検出 (resource-hashes・frictionless-schema・resources-complete も連鎖)。lenient では structure/schema は除外されるが resource-hashes が残るので valid:false のまま",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "datapackage/resource-hashes",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/frictionless-schema",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/frictionless-structure",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "datapackage/resource-hashes",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/frictionless-schema",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/frictionless-structure",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "datapackage/resource-hashes",
+              "severity": "error"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            },
+            {
+              "rule": "datapackage/resources-complete",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
       "file": "fixtures/wacz-missing-pages.wacz",
       "description": "pages/pages.jsonl が欠落 (§5.2.3 の MUST 欠落)。宣言も落とすので required-files 単独",
       "expect": {
