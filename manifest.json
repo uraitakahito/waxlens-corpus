@@ -466,6 +466,96 @@
       }
     },
     {
+      "file": "fixtures/cdxj-index-not-cdxj.wacz",
+      "description": "indexes/index.cdxj の中身が CDXJ でない(§5.2.2 MUST contain CDXJ data)。index-valid-data が error。CDXJ entry が無いので pages-mainpage の no-cdxj-record warning も連鎖する",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-valid-data",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-valid-data",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "warning"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-valid-data",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/pages-mainpage",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "fixtures/cdxj-gzip-index-not-cdxj.wacz",
+      "description": "webrecorder layout の index.cdx.gz を gunzip すると非CDXJ(§5.2.2 後半 MAY be gzip compressed の中身検証)。index-valid-data が error、webrecorder layout 由来の index-not-gzipped も連鎖",
+      "byProfile": {
+        "spec": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-valid-data",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "warning"
+            }
+          ]
+        },
+        "browserhive": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-valid-data",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "error"
+            }
+          ]
+        },
+        "lenient": {
+          "valid": false,
+          "issues": [
+            {
+              "rule": "cdxj/index-valid-data",
+              "severity": "error"
+            },
+            {
+              "rule": "cdxj/index-not-gzipped",
+              "severity": "info"
+            }
+          ]
+        }
+      }
+    },
+    {
       "file": "fixtures/warc-deflate.wacz",
       "description": "WARC を DEFLATE 格納 (STORE であるべき) — warning",
       "byProfile": {
