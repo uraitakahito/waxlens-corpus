@@ -1,0 +1,53 @@
+# docs サイトを GitHub Pages へ公開する。
+#
+# WACZ の実体(Git LFS)は要らない —— docs のビルドは manifest.json と
+# markdown しか読まないので、lfs: false で帯域を使わずに済む。実体が要るのは
+# waxlens 側の corpus.yml（凍結された bytes を検証する回帰ゲート）だけ。
+name: docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: docs-site/package-lock.json
+      - run: npm ci --prefix docs-site
+      - run: npm run build --prefix docs-site
+      # 出力に base の付かない内部参照が無いか。Astro は markdown のリンクには
+      # base を補うが HTML/JSX の属性と frontmatter には触れず、ビルドも警告を
+      # 出さないので、公開して 404 を踏むまで気付けない。
+      - run: node scripts/check-base-urls.mjs docs-site/dist /waxlens-corpus
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs-site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

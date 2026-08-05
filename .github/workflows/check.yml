@@ -1,0 +1,26 @@
+# manifest.json ↔ fixtures/ の整合チェック。
+#
+# waxlens 非依存で、ファイル名しか見ないので LFS 実体は不要 (lfs: false)。
+# 実 validation との一致は waxlens 側の corpus.yml が見る。
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # npm ci は要らない。このスクリプトは Node 標準だけで動く。
+      - run: node scripts/check-manifest.mjs
