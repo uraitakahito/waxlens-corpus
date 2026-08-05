@@ -1,77 +1,28 @@
 # waxlens-corpus
 
 [waxlens](https://github.com/uraitakahito/waxlens) の validation rule を検証する
-ための WACZ 標本集。 各 rule を **違反させる WACZ** と、 全 rule を **pass する
-正常系 WACZ** を収め、 期待結果を単一の `manifest.json` に集約する
-(flat fixtures + 中央 manifest)。
+ための WACZ 標本集。**29 本のうち 27 本は意図的に壊してあり**、期待結果は
+`manifest.json` に集約しています。
 
-WACZ は Git LFS で格納する（`.gitattributes` 参照）。
+📖 **https://uraitakahito.github.io/waxlens-corpus/**
+（日本語: https://uraitakahito.github.io/waxlens-corpus/ja/）
 
-## 構成
-
-```
-fixtures/            全 WACZ 標本 (Git LFS)
-  good.wacz                  全 rule pass の正常系 (browserhive producer)
-  good-webrecorder.wacz      webrecorder producer の正常系
-  warc-deflate.wacz          各 rule を 1 つ違反させた標本 …
-  …
-manifest.json        各 fixture の期待 validation 結果 (単一の真実源)
-scripts/
-  check-manifest.mjs manifest ↔ fixtures の整合チェック (waxlens 非依存)
-```
-
-## manifest.json のスキーマ
-
-```jsonc
-{
-  "generatedBy": "waxlens / build-corpus",
-  "defaultProfile": "spec",
-  "fixtures": [
-    // profile 横断で結果が同じ標本は expect 1 本
-    {
-      "file": "fixtures/warc-deflate.wacz",
-      "description": "WARC を DEFLATE 格納 …",
-      "expect": { "valid": true, "issues": [{ "rule": "warc/storage-store", "severity": "warning" }] }
-    },
-    // profile で結果が変わる標本は byProfile
-    {
-      "file": "fixtures/good-webrecorder.wacz",
-      "description": "…",
-      "byProfile": {
-        "spec":        { "valid": true,  "issues": [] },
-        "browserhive": { "valid": false, "issues": [{ "rule": "cdxj/index-not-gzipped", "severity": "error" }] },
-        "lenient":     { "valid": true,  "issues": [ … ] }
-      }
-    }
-  ]
-}
-```
-
-`expect` / `byProfile` の `issues` は **waxlens が実際に `runValidation` した出力**
-であって手書きの宣言ではない（生成時に self-validation 済み）。
-
-## 生成方法（破壊的再生成）
-
-標本と manifest は waxlens 側の generator が作る（`buildWacz` は waxlens の
-test 内部にあり public API でないため、生成元は waxlens に置く）。
+## 使いはじめる
 
 ```sh
-# waxlens の clone で、CORPUS_DIR にこの repo の絶対パスを渡す
-#   ※ vitest は packages/core を CWD に走るので、相対パスは避けて絶対パス推奨
-cd /path/to/waxlens
-CORPUS_DIR=/path/to/waxlens-corpus pnpm --filter @waxlens/core corpus:build
+git clone https://github.com/uraitakahito/waxlens-corpus
+cd waxlens-corpus
+git lfs pull                      # WACZ の実体（名前の検査だけなら不要）
+node scripts/check-manifest.mjs   # 依存ゼロ。npm install は要らない
 ```
 
-generator は zip entry の mtime を固定値で書くので、同じ waxlens revision
-からは **byte 同一**の標本が再生成される（Git LFS の churn なし）。
+## ⚠ 再生成は破壊的です
 
-fixture の追加・変更は waxlens 側の `packages/core/test/corpus/spec.ts` を編集して
-再生成する。
+`corpus:build` は `fixtures/` を**ディレクトリごと削除してから**書き直します。
+手で置いたファイルは消え、未追跡なら Git からも戻せません。実行前にこの repo が
+clean であることを確認してください。手順は
+[再生成](https://uraitakahito.github.io/waxlens-corpus/ja/regenerating/)にあります。
 
-## 整合チェック
+## ライセンス
 
-```sh
-node scripts/check-manifest.mjs
-```
-
-manifest の参照漏れ・孤児ファイルを検出する（CI 向け、Git LFS 実体の取得は不要）。
+[Unlicense](LICENSE)
