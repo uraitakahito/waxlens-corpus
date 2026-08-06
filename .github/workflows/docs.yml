@@ -8,6 +8,14 @@ name: docs
 on:
   push:
     branches: [main]
+    # docs に関係するものだけ。fixtures/*.wacz の差し替えでは
+    # サイトの中身が変わらないので、LFS の push で毎回 deploy しない。
+    # manifest.json は catalogue の表の生成元なので対象に含める。
+    paths:
+      - "docs-site/**"
+      - "manifest.json"
+      - "scripts/check-base-urls.mjs"
+      - ".github/workflows/docs.yml"
   workflow_dispatch:
 
 permissions:
@@ -20,6 +28,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
