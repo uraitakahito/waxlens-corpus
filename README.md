@@ -4,8 +4,8 @@
 ための WACZ 標本集。**29 本のうち 27 本は意図的に壊してあり**、期待結果は
 `manifest.json` に集約しています。
 
-📖 **https://uraitakahito.github.io/waxlens-corpus/**
-（日本語: https://uraitakahito.github.io/waxlens-corpus/ja/）
+📖 **[ドキュメント](https://uraitakahito.github.io/waxlens-corpus/)**
+（[日本語](https://uraitakahito.github.io/waxlens-corpus/ja/)）
 
 ## 使いはじめる
 
