@@ -8,8 +8,6 @@ validation rules.
 
 ## It is not a collection of good archives
 
-This is the thing most people get backwards, so it is worth stating first.
-
 | | count |
 | --- | --- |
 | Deliberately broken | **27** |
