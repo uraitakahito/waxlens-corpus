@@ -13,14 +13,8 @@ validation rules.
 | Deliberately broken | **27** |
 | Passing everything | **2** (`good`, `good-webrecorder`) |
 
-The corpus is not a showcase of correct WACZ. It is **a catalogue of ways to be
-wrong**, and the test that consumes it asserts that waxlens **finds** each one.
-The pass condition is inverted from what you might expect: for 27 of the 29
-specimens, **an archive producing no findings is a failure**.
-
-That is what makes it useful. If every rule were deleted, a corpus of good
-archives would still be green — the tests would notice nothing. A corpus of
-broken ones goes red 27 times.
+This provides WACZ-format sample data to waxlens. For 27 of the 29 specimens,
+**producing no findings is a failure**.
 
 ## Broken is not the same as invalid
 
