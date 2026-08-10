@@ -5,6 +5,7 @@
     {
       "file": "fixtures/good.wacz",
       "description": "全 rule を pass する正常系 WACZ (browserhive producer)",
+      "$schema": null,
       "expect": {
         "valid": true,
         "issues": []
@@ -13,6 +14,7 @@
     {
       "file": "fixtures/good-webrecorder.wacz",
       "description": "webrecorder producer の正常系。spec/lenient では valid、browserhive では cdxj/index-not-gzipped が error (byProfile になる)",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -46,6 +48,7 @@
     {
       "file": "fixtures/datapackage-no-profile.wacz",
       "description": "datapackage.json の profile field を省略",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -59,6 +62,7 @@
     {
       "file": "fixtures/datapackage-wrong-profile.wacz",
       "description": "datapackage.json の profile が不正な値",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -72,6 +76,7 @@
     {
       "file": "fixtures/datapackage-unknown-version.wacz",
       "description": "wacz_version が未知の値 (9.9.9) — warning",
+      "$schema": null,
       "expect": {
         "valid": true,
         "issues": [
@@ -85,6 +90,7 @@
     {
       "file": "fixtures/datapackage-bad-hash.wacz",
       "description": "datapackage.json の resource hash が実体と不一致",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -98,6 +104,7 @@
     {
       "file": "fixtures/datapackage-absent.wacz",
       "description": "datapackage.json を丸ごと欠落 (§5.2.4 の MUST 欠落 → required-files)",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -111,6 +118,7 @@
     {
       "file": "fixtures/datapackage-frictionless-bad-name.wacz",
       "description": "resource.name が Frictionless の許容パターン外 (大文字)。WACZ 固有 rule は通り、frictionless-schema だけが warning (lenient では除外)",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -139,6 +147,7 @@
     {
       "file": "fixtures/datapackage-empty-resources.wacz",
       "description": "resources を空配列に。frictionless-structure が構造 MUST 違反を error 検出 (resource-hashes・frictionless-schema・resources-complete も連鎖)。lenient では structure/schema は除外されるが resource-hashes が残るので valid:false のまま",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -236,6 +245,7 @@
     {
       "file": "fixtures/wacz-missing-pages.wacz",
       "description": "pages/pages.jsonl が欠落 (§5.2.3 の MUST 欠落)。宣言も落とすので required-files 単独",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -249,6 +259,7 @@
     {
       "file": "fixtures/wacz-missing-archive.wacz",
       "description": "archive/ に WARC が無い (§5.2.1 の MUST 欠落)。宣言も落とすので required-files 単独",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -262,6 +273,7 @@
     {
       "file": "fixtures/wacz-missing-indexes.wacz",
       "description": "indexes/ に index が無い (§5.2.2 の MUST 欠落)。required-files に加え index-recognised-by-wabac も発火 (相補的)",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -279,6 +291,7 @@
     {
       "file": "fixtures/cdxj-filename-absolute.wacz",
       "description": "CDXJ の filename が archive-relative でない",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -312,6 +325,7 @@
     {
       "file": "fixtures/cdxj-index-gzipped.wacz",
       "description": "index を gzip 化 (browserhive layout)。index-not-gzipped と index-recognised-by-wabac が発火",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -357,6 +371,7 @@
     {
       "file": "fixtures/cdxj-offset-wrong.wacz",
       "description": "CDXJ の offset が WARC 実体とずれている",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -390,6 +405,7 @@
     {
       "file": "fixtures/cdxj-length-mismatch.wacz",
       "description": "CDXJ の length が WARC member 長と不一致 (length 分岐)",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -423,6 +439,7 @@
     {
       "file": "fixtures/cdxj-mainpage-orphan.wacz",
       "description": "mainPageURL が CDXJ/pages に存在しない URL — warning",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -468,6 +485,7 @@
     {
       "file": "fixtures/cdxj-index-not-cdxj.wacz",
       "description": "indexes/index.cdxj の中身が CDXJ でない(§5.2.2 MUST contain CDXJ data)。index-valid-data が error。CDXJ entry が無いので pages-mainpage の no-cdxj-record warning も連鎖する",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -513,6 +531,7 @@
     {
       "file": "fixtures/cdxj-gzip-index-not-cdxj.wacz",
       "description": "webrecorder layout の index.cdx.gz を gunzip すると非CDXJ(§5.2.2 後半 MAY be gzip compressed の中身検証)。index-valid-data が error、webrecorder layout 由来の index-not-gzipped も連鎖",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -558,6 +577,7 @@
     {
       "file": "fixtures/warc-deflate.wacz",
       "description": "WARC を DEFLATE 格納 (STORE であるべき) — warning",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -591,6 +611,7 @@
     {
       "file": "fixtures/warc-corrupt-member.wacz",
       "description": "WARC.gz の deflate stream を 1 byte 破壊 (decode 不能)",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -636,6 +657,7 @@
     {
       "file": "fixtures/warc-payload-digest-bad.wacz",
       "description": "WARC-Payload-Digest header が実体と不一致 — warning",
+      "$schema": null,
       "expect": {
         "valid": true,
         "issues": [
@@ -649,6 +671,7 @@
     {
       "file": "fixtures/fuzzy-not-json.wacz",
       "description": "fuzzy.json が JSON でない — info",
+      "$schema": null,
       "expect": {
         "valid": true,
         "issues": [
@@ -662,6 +685,7 @@
     {
       "file": "fixtures/warc-extension-mismatch.wacz",
       "description": "gzip 済み WARC を .warc.gz でなく archive/data.warc 名で格納(§5.2.1 拡張子)",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": false,
@@ -719,6 +743,7 @@
     {
       "file": "fixtures/pages-bad-line.wacz",
       "description": "pages.jsonl の page 行が url/ts を欠く(§5.2.3)",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -752,6 +777,7 @@
     {
       "file": "fixtures/datapackage-digest-absent.wacz",
       "description": "datapackage-digest.json が無い(§5.2.5 SHOULD)— warning",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -785,6 +811,7 @@
     {
       "file": "fixtures/datapackage-digest-bad-hash.wacz",
       "description": "datapackage-digest.json の hash が datapackage.json と不一致 — error",
+      "$schema": null,
       "expect": {
         "valid": false,
         "issues": [
@@ -798,6 +825,7 @@
     {
       "file": "fixtures/reserved-dir-extra-file.wacz",
       "description": "予約ディレクトリ archive/ に異物ファイル(archive/notes.txt)— MUST NOT",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
@@ -843,6 +871,7 @@
     {
       "file": "fixtures/datapackage-orphan-file.wacz",
       "description": "resources に未宣言の孤児ファイル(extra.bin)— MUST",
+      "$schema": null,
       "byProfile": {
         "spec": {
           "valid": true,
