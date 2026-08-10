@@ -47,16 +47,16 @@ description: スキーマと、期待値が嘘をつけない理由と、default
 「まだ記録していない古い manifest」が同じ形になり、区別が付かなくなるからです。
 `corpus-driven` はこのキーの有無で古い manifest を検出して skip します。
 
-**現在 29 件すべてが `null` です。** Data Package v2 の `$schema` を名乗る標本は
-まだ 1 つもなく、v1 の `profile` で名乗るものだけが入っています。
-[カタログ](../catalogue/)の `$schema` 列が全行 `—` なのはそのためで、これは表示の
-不備ではなく**記録された事実**です。
+**30 件のうち 29 件が `null` です。** Data Package v2 の `$schema` を名乗るのは
+`datapackage-schema-only` の 1 件だけで、残りは v1 の `profile` で名乗っています。
+[カタログ](../catalogue/)の `$schema` 列がほぼ全行 `—` なのはそのためで、これは
+表示の不備ではなく**記録された事実**です。
 
 ## `defaultProfile` は「省略形の読み方」を決めます
 
 waxlens は同じアーカイブを 3 つの profile —— `spec` / `browserhive` /
 `lenient` —— で検証できます。rule の集合は同じで、severity が組み替わります。
-**29 件のうち 17 件は、どれを選ぶかで結果が変わります。**
+**30 件のうち 17 件は、どれを選ぶかで結果が変わります。**
 
 残る 12 件はどこでも同じ結果なので、manifest は 3 回繰り返す代わりに `expect` を
 1 本だけ書きます。すると「その 1 本はどの profile の値なのか」という問いが立ち、

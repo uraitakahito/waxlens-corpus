@@ -1,6 +1,6 @@
 ---
 title: archive の入手方法
-description: 29 本の WACZ 標本を手に入れる方法（Git LFS に入っています）。
+description: 30 本の WACZ 標本を手に入れる方法（Git LFS に入っています）。
 ---
 
 WACZ は **Git LFS** 管理です。実体を得る方法は 3 つあります。
