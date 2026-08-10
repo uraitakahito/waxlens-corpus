@@ -1,6 +1,6 @@
 ---
 title: waxlens-corpus
-description: waxlens の validation rule を検証するための WACZ 標本集。29 本のうち 27 本は意図的に壊してあります。
+description: waxlens の validation rule を検証するための WACZ 標本集。30 本のうち 28 本は意図的に壊してあります。
 ---
 
 [waxlens](https://uraitakahito.github.io/waxlens/ja/) の validation rule を
@@ -10,11 +10,15 @@ description: waxlens の validation rule を検証するための WACZ 標本集
 
 | | 件数 |
 | --- | --- |
-| 意図的に壊してあるもの | **27** |
+| 意図的に壊してあるもの | **28** |
 | 全 rule を通るもの | **2**（`good` / `good-webrecorder`） |
 
 これは waxlens に WACZ 形式のサンプルデータを提供するものです。
-**27 件については「何も指摘が出ない」ことが失敗**です。
+**28 件については「何も指摘が出ない」ことが失敗**です。
+
+うち 1 件は壊れているというより、別の仕様に忠実です ——
+`datapackage-schema-only` は Data Package v2 として正しい descriptor で、
+v2 が廃止した `profile` を WACZ 1.1 が要求するために失敗します。
 
 ## 「壊れている」と「無効」は別です
 
