@@ -17,6 +17,7 @@ what waxlens outputs.
     {
       "file": "fixtures/warc-deflate.wacz",
       "description": "WARC stored with DEFLATE …",
+      "$schema": null,
       "expect": {
         "valid": true,
         "issues": [{ "rule": "warc/storage-store", "severity": "warning" }]
@@ -26,6 +27,7 @@ what waxlens outputs.
     {
       "file": "fixtures/good-webrecorder.wacz",
       "description": "…",
+      "$schema": null,
       "byProfile": {
         "spec":        { "valid": true,  "issues": [{ "rule": "cdxj/index-not-gzipped", "severity": "warning" }] },
         "browserhive": { "valid": false, "issues": [{ "rule": "cdxj/index-not-gzipped", "severity": "error" }] },
@@ -35,6 +37,24 @@ what waxlens outputs.
   ]
 }
 ```
+
+## `$schema` is what was found, not what was intended
+
+The **observed** value of the `$schema` that the specimen's `datapackage.json`
+declares. It is read back out of the WACZ that was just written, so what gets
+recorded is what is actually in the file — not what the generator meant to put
+there.
+
+When nothing is declared the value is `null` — **the key is never omitted**.
+Omitting it would make "declares nothing" and "not recorded yet (an old
+manifest)" the same shape, and they would become indistinguishable.
+`corpus-driven` uses the presence of this key to detect a stale manifest and
+skip.
+
+**All 29 are `null` today.** Not one specimen declares a Data Package v2
+`$schema`; the ones that name a contract do it with v1's `profile`. That is why
+the `$schema` column in the [catalogue](../catalogue/) is `—` on every row — it
+is not a rendering gap, it is the recorded fact.
 
 ## `defaultProfile` decides how the short form is read
 

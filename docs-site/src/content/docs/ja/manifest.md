@@ -16,6 +16,7 @@ description: スキーマと、期待値が嘘をつけない理由と、default
     {
       "file": "fixtures/warc-deflate.wacz",
       "description": "WARC を DEFLATE 格納 …",
+      "$schema": null,
       "expect": {
         "valid": true,
         "issues": [{ "rule": "warc/storage-store", "severity": "warning" }]
@@ -25,6 +26,7 @@ description: スキーマと、期待値が嘘をつけない理由と、default
     {
       "file": "fixtures/good-webrecorder.wacz",
       "description": "…",
+      "$schema": null,
       "byProfile": {
         "spec":        { "valid": true,  "issues": [{ "rule": "cdxj/index-not-gzipped", "severity": "warning" }] },
         "browserhive": { "valid": false, "issues": [{ "rule": "cdxj/index-not-gzipped", "severity": "error" }] },
@@ -34,6 +36,21 @@ description: スキーマと、期待値が嘘をつけない理由と、default
   ]
 }
 ```
+
+## `$schema` は「見に行った結果」です
+
+各標本の `datapackage.json` が宣言する `$schema` の**実測値**です。生成時に
+書き出した WACZ を開いて読むので、記録されるのは「宣言したつもり」ではなく
+実際にファイルへ入っているものです。
+
+宣言が無ければ `null` —— **キーごと省略はしません**。省略すると「宣言が無い」と
+「まだ記録していない古い manifest」が同じ形になり、区別が付かなくなるからです。
+`corpus-driven` はこのキーの有無で古い manifest を検出して skip します。
+
+**現在 29 件すべてが `null` です。** Data Package v2 の `$schema` を名乗る標本は
+まだ 1 つもなく、v1 の `profile` で名乗るものだけが入っています。
+[カタログ](../catalogue/)の `$schema` 列が全行 `—` なのはそのためで、これは表示の
+不備ではなく**記録された事実**です。
 
 ## `defaultProfile` は「省略形の読み方」を決めます
 
