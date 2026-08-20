@@ -1,7 +1,7 @@
 # waxlens-corpus
 
 [waxlens](https://github.com/uraitakahito/waxlens) の validation rule を検証する
-ための WACZ 標本集。**30 本のうち 28 本は意図的に壊してあり**、期待結果は
+ための WACZ 標本集。**29 本のうち 28 本は意図的に壊してあり**、期待結果は
 `manifest.json` に集約しています。
 
 📖 **[ドキュメント](https://uraitakahito.github.io/waxlens-corpus/)**

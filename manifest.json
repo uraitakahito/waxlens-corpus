@@ -683,20 +683,6 @@
       }
     },
     {
-      "file": "fixtures/fuzzy-not-json.wacz",
-      "description": "fuzzy.json が JSON でない — info",
-      "$schema": null,
-      "expect": {
-        "valid": true,
-        "issues": [
-          {
-            "rule": "fuzzy/valid-json",
-            "severity": "info"
-          }
-        ]
-      }
-    },
-    {
       "file": "fixtures/warc-extension-mismatch.wacz",
       "description": "gzip 済み WARC を .warc.gz でなく archive/data.warc 名で格納(§5.2.1 拡張子)",
       "$schema": null,

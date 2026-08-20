@@ -1,6 +1,6 @@
 ---
 title: Getting the archives
-description: How to obtain the 30 WACZ specimens (they live in Git LFS).
+description: How to obtain the 29 WACZ specimens (they live in Git LFS).
 ---
 
 The WACZ files are stored with **Git LFS**. Three ways to obtain them:

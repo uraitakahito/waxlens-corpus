@@ -1,6 +1,6 @@
 ---
 title: waxlens-corpus
-description: WACZ specimens for testing waxlens validation rules — 30 archives, 28 of them broken on purpose.
+description: WACZ specimens for testing waxlens validation rules — 29 archives, 28 of them broken on purpose.
 ---
 
 A collection of WACZ specimens for exercising [waxlens](https://uraitakahito.github.io/waxlens/)
@@ -13,7 +13,7 @@ validation rules.
 | Deliberately broken | **28** |
 | Passing everything | **2** (`good`, `good-webrecorder`) |
 
-This provides WACZ-format sample data to waxlens. For 28 of the 30 specimens,
+This provides WACZ-format sample data to waxlens. For 28 of the 29 specimens,
 **producing no findings is a failure**.
 
 One of those 28 is not broken so much as loyal to a different spec:
