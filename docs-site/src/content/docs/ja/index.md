@@ -1,6 +1,6 @@
 ---
 title: waxlens-corpus
-description: waxlens の validation rule を検証するための WACZ 標本集。30 本のうち 28 本は意図的に壊してあります。
+description: waxlens の validation rule を検証するための WACZ 標本集。29 本のうち 28 本は意図的に壊してあります。
 ---
 
 [waxlens](https://uraitakahito.github.io/waxlens/ja/) の validation rule を

@@ -39,7 +39,6 @@ corpus の `manifest.json` から `corpus:docs` が生成します。再生成�
 | `warc-deflate.wacz` | WARC を DEFLATE 格納 (STORE であるべき) — warning | — | `warc/storage-store` (warning) | 0 |
 | `warc-corrupt-member.wacz` | WARC.gz の deflate stream を 1 byte 破壊 (decode 不能) | — | `warc/members-independent` (error), `cdxj/warc-offsets` (error) | 1 |
 | `warc-payload-digest-bad.wacz` | WARC-Payload-Digest header が実体と不一致 — warning | — | `warc/payload-digest` (warning) | 0 |
-| `fuzzy-not-json.wacz` | fuzzy.json が JSON でない — info | — | `fuzzy/valid-json` (info) | 0 |
 | `warc-extension-mismatch.wacz` | gzip 済み WARC を .warc.gz でなく archive/data.warc 名で格納(§5.2.1 拡張子) | — | `datapackage/resource-hashes` (error), `datapackage/resources-complete` (warning), `warc/extension-gzip-match` (warning) | 1 |
 | `pages-bad-line.wacz` | pages.jsonl の page 行が url/ts を欠く(§5.2.3) | — | `pages/page-schema` (warning) | 0 |
 | `datapackage-digest-absent.wacz` | datapackage-digest.json が無い(§5.2.5 SHOULD)— warning | — | `datapackage/digest` (warning) | 0 |

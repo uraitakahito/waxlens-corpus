@@ -51,7 +51,7 @@ manifest)" the same shape, and they would become indistinguishable.
 `corpus-driven` uses the presence of this key to detect a stale manifest and
 skip.
 
-**29 of the 30 are `null`.** Exactly one specimen declares a Data Package v2
+**28 of the 29 are `null`.** Exactly one specimen declares a Data Package v2
 `$schema` — `datapackage-schema-only`; the rest name their contract with v1's
 `profile`. That is why the `$schema` column in the [catalogue](../catalogue/) is
 `—` on nearly every row — it is not a rendering gap, it is the recorded fact.
@@ -60,7 +60,7 @@ skip.
 
 waxlens can validate the same archive under three profiles — `spec`,
 `browserhive`, `lenient` — and the rules are the same set with severities
-re-graded. **17 of the 30 specimens produce different results depending on which
+re-graded. **17 of the 29 specimens produce different results depending on which
 one you pick.**
 
 For the other 12 the result is identical everywhere, so the manifest writes a
